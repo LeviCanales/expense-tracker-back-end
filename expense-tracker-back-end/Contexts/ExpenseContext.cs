@@ -17,10 +17,13 @@ namespace expense_tracker_back_end.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserPermission>().HasKey(id=> new { id.UserID, id.PermissionID });
+            modelBuilder.Entity<UserSetting>().HasKey(id => new { id.UserID, id.SettingID });
         }
 
         public DbSet<Person> People { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<PaymentType> PaymentTypes { get; set; }
     }
 }
