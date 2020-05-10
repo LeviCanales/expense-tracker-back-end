@@ -12,5 +12,6 @@ namespace expense_tracker_back_end.Models
         public string Pass { get; set; }
         public int PersonID { get; set; }
         public Person Person { get; set; }
+        public ICollection<UserPermission> UserLink { get; set; }
     }
 }
