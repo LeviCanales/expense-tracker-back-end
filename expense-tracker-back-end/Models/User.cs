@@ -15,5 +15,7 @@ namespace expense_tracker_back_end.Models
         public ICollection<UserPermission> PermissionLink { get; set; }
         public ICollection<UserSetting> SettingLink { get; set; }
         public ICollection<PaymentType> UserPaymentTypes { get; set; }
+        public ICollection<Category> UserCategories { get; set; }
+        public ICollection<Expense> Expense { get; set; }
     }
 }

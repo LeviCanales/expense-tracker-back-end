@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace expense_tracker_back_end.Models
 {
-    public class PaymentType
+    public class Category
     {
-        public int PaymentTypeID { get; set; }
-        public string PaymentTypeName { get; set; }
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
         public int UserID { get; set; }
         public ICollection<Expense> Expense { get; set; }
     }
+
 }
