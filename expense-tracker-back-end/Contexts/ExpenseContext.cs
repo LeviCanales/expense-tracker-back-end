@@ -14,7 +14,7 @@ namespace expense_tracker_back_end.Contexts
 
         }
 
-        public DbSet<Persona> Personas { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
