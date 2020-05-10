@@ -11,6 +11,7 @@ namespace expense_tracker_back_end.Models
         public string CategoryName { get; set; }
         public int UserID { get; set; }
         public ICollection<Expense> Expense { get; set; }
+        public ICollection<Alarm> Alarm { get; set; }
     }
 
 }

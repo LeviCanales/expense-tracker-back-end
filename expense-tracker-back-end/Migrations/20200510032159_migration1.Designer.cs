@@ -10,8 +10,8 @@ using expense_tracker_back_end.Contexts;
 namespace expense_tracker_back_end.Migrations
 {
     [DbContext(typeof(ExpenseContext))]
-    [Migration("20200510030127_m5")]
-    partial class m5
+    [Migration("20200510032159_migration1")]
+    partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,40 @@ namespace expense_tracker_back_end.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("expense_tracker_back_end.Models.Alarm", b =>
+                {
+                    b.Property<int>("AlarmID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("MaxCost")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("MaxQuantity")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("StartCountDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("AlarmID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Alarms");
+                });
 
             modelBuilder.Entity("expense_tracker_back_end.Models.Category", b =>
                 {
@@ -38,7 +72,7 @@ namespace expense_tracker_back_end.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("expense_tracker_back_end.Models.Expense", b =>
@@ -80,7 +114,7 @@ namespace expense_tracker_back_end.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Expense");
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("expense_tracker_back_end.Models.PaymentType", b =>
@@ -214,6 +248,21 @@ namespace expense_tracker_back_end.Migrations
                     b.ToTable("UserSetting");
                 });
 
+            modelBuilder.Entity("expense_tracker_back_end.Models.Alarm", b =>
+                {
+                    b.HasOne("expense_tracker_back_end.Models.Category", null)
+                        .WithMany("Alarm")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("expense_tracker_back_end.Models.User", null)
+                        .WithMany("UserAlarms")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("expense_tracker_back_end.Models.Category", b =>
                 {
                     b.HasOne("expense_tracker_back_end.Models.User", null)
@@ -238,7 +287,7 @@ namespace expense_tracker_back_end.Migrations
                         .IsRequired();
 
                     b.HasOne("expense_tracker_back_end.Models.User", null)
-                        .WithMany("Expense")
+                        .WithMany("UserExpenses")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

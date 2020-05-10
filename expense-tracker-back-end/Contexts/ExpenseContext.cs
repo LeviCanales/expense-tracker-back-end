@@ -25,5 +25,8 @@ namespace expense_tracker_back_end.Contexts
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Alarm> Alarms { get; set; }
     }
 }
